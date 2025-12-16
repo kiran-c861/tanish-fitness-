@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 96%;
+
+    --card: 222 47% 9%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 222 47% 9%;
+    --popover-foreground: 210 40% 96%;
+
+    --primary: 142 71% 45%;
+    --primary-foreground: 222 47% 6%;
+
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 96%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 55%;
+
+    --accent: 217 33% 20%;
+    --accent-foreground: 210 40% 96%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 222 47% 6%;
+
+    --success: 142 71% 45%;
+    --success-foreground: 222 47% 6%;
+
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 142 71% 45%;
+
+    --radius: 0.75rem;
+
+    /* Custom fitness theme tokens */
+    --glow-primary: 0 0 40px hsl(142 71% 45% / 0.3);
+    --glow-card: 0 10px 40px rgba(0, 0, 0, 0.4);
+    --gradient-bg: linear-gradient(135deg, hsl(222 47% 6%) 0%, hsl(222 47% 10%) 50%, hsl(222 47% 6%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(222 47% 11% / 0.8), hsl(222 47% 8% / 0.9));
+    --gradient-primary: linear-gradient(135deg, hsl(142 71% 50%), hsl(142 71% 40%));
+    --gradient-surplus: linear-gradient(135deg, hsl(142 71% 45%), hsl(160 71% 40%));
+    --gradient-deficit: linear-gradient(135deg, hsl(0 70% 55%), hsl(15 70% 50%));
+    
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 96%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background: var(--gradient-bg);
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Orbitron', sans-serif;
+  }
+  
+  .glow-primary {
+    box-shadow: var(--glow-primary);
+  }
+  
+  .glass-card {
+    background: var(--gradient-card);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border));
+    box-shadow: var(--glow-card), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+  
+  .stat-card {
+    @apply glass-card rounded-xl p-4 transition-all duration-300;
+  }
+  
+  .stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--glow-card), var(--glow-primary);
+  }
+  
+  .adjustment-btn {
+    @apply px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 cursor-pointer border-2;
+  }
+  
+  .adjustment-btn-surplus {
+    @apply bg-success/10 border-success/30 text-success hover:bg-success/20 hover:border-success;
+  }
+  
+  .adjustment-btn-deficit {
+    @apply bg-destructive/10 border-destructive/30 text-destructive hover:bg-destructive/20 hover:border-destructive;
+  }
+  
+  .adjustment-btn-active-surplus {
+    @apply bg-success text-success-foreground border-success glow-primary;
+  }
+  
+  .adjustment-btn-active-deficit {
+    @apply bg-destructive text-destructive-foreground border-destructive;
+    box-shadow: 0 0 30px hsl(0 84% 60% / 0.3);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(142 71% 45% / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px hsl(142 71% 45% / 0.5);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes count-up {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.5s ease-out forwards;
+}
+
+.animate-count-up {
+  animation: count-up 0.3s ease-out forwards;
+}
+
+/* Remove default number input spinners for consistent appearance */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
